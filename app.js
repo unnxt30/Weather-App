@@ -45,7 +45,7 @@ searchBtn.addEventListener('click', ()=>{
 })
 
 function getURL(country, myKey){
-    return  `http://api.weatherapi.com/v1/current.json?key=${myKey}&q=${country}`
+    return  `https://api.weatherapi.com/v1/current.json?key=${myKey}&q=${country}`
 }
 
 
