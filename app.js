@@ -6,6 +6,8 @@ const displayName = document.querySelector('#displayCity #text');
 const displayTemp = document.querySelector('#temp #text');
 const displaytFeels = document.querySelector('#feels #text');
 const displayCondition = document.querySelector('#condition #text');
+const loadingPage = document.querySelector(".loading");
+
 
 form.addEventListener("submit", (e) => {
     e.preventDefault();
@@ -13,6 +15,7 @@ form.addEventListener("submit", (e) => {
 })
 
 searchBtn.addEventListener('click', ()=>{
+    loadingPage.classList.add("active");
     var cityReq = city.value;
     let url = getURL(cityReq, myKey);
     let fetched =  async () => {
@@ -28,6 +31,7 @@ searchBtn.addEventListener('click', ()=>{
     let htmlUpdate = async () =>{
         try{
             let useData = await fetched();
+            loadingPage.classList.remove("active")
             displayName.innerHTML = useData.name;
             displayTemp.innerHTML = useData.tempF;
             displayCondition.innerHTML = useData.condition;
