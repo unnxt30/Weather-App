@@ -3,9 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>ForecastHub</title>
     <link rel="stylesheet" href="style.css">
-    
+    <link rel="icon" href = "img/logo.png">
     <script src="app.js" defer></script>
 </head>
 <body>
@@ -13,12 +13,29 @@
     <div class="header">
         <form id="cityValue">
             <input id="city-name" type="text" name="city" placeholder="City">
-            <button>Go</button>
+            <button><img src="img/arrow-right.svg" height="30px" width="30px"></button>
         </form>
     </div>
 
     <div class="main_container">
-        
+        <div id="displayCity">
+            <div id="text"></div>
+            <div id="icon"><img src="img/map-marker-outline.svg" height="50px" width="50px"></div>
+        </div>
+        <div class="attributes">
+            <div id="temp">
+                <div id="text"></div>
+                <div id="sub_text">Temperature(℉)</div>
+            </div>
+            <div id="feels">
+                <div id="text"></div>
+                <div id="sub_text">Feels Like(℉)</div>
+            </div>
+            <div id="condition">
+                <div id="text"></div>
+                <div id="sub_text">Condition</div>
+            </div>
+        </div>
     </div>
     
 </body>

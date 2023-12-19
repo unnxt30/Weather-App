@@ -2,6 +2,10 @@ const form = document.querySelector('#cityValue');
 const city = document.querySelector('#city-name');
 const myKey = "e41f979b7ef04d25b6b185006231111";
 const searchBtn = document.querySelector('button');
+const displayName = document.querySelector('#displayCity #text');
+const displayTemp = document.querySelector('#temp #text');
+const displaytFeels = document.querySelector('#feels #text');
+const displayCondition = document.querySelector('#condition #text');
 
 form.addEventListener("submit", (e) => {
     e.preventDefault();
@@ -14,13 +18,26 @@ searchBtn.addEventListener('click', ()=>{
     let fetched =  async () => {
         try{
             let fetched_data = await fetchData(url);
-            console.log(fetched_data.displayData.name);
+            return fetched_data.displayData;
         }
         catch(err){
             console.log(err);
         }
     }
-    fetched();
+    
+    let htmlUpdate = async () =>{
+        try{
+            let useData = await fetched();
+            displayName.innerHTML = useData.name;
+            displayTemp.innerHTML = useData.tempF;
+            displayCondition.innerHTML = useData.condition;
+            displaytFeels.innerHTML = useData.feels;
+        }
+        catch(err){
+            console.log(err);
+        }
+    }
+    htmlUpdate();
 })
 
 function getURL(country, myKey){
