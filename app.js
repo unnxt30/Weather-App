@@ -14,7 +14,7 @@ form.addEventListener("submit", (e) => {
 
 })
 
-searchBtn.addEventListener('click', ()=>{
+searchBtn.addEventListener('click', (e)=>{
     loadingPage.classList.add("active");
     var cityReq = city.value;
     let url = getURL(cityReq, myKey);
@@ -31,6 +31,12 @@ searchBtn.addEventListener('click', ()=>{
     let htmlUpdate = async () =>{
         try{
             let useData = await fetched();
+            if(isRaining(useData.condition)){
+                 document.body.style.backgroundImage = `url('./img/rainBg.gif')`
+            }
+            else{
+                document.body.style.backgroundImage = `url('./img/background.jpg')`
+            }
             loadingPage.classList.remove("active")
             displayName.innerHTML = useData.name;
             displayTemp.innerHTML = useData.tempF;
@@ -39,6 +45,7 @@ searchBtn.addEventListener('click', ()=>{
         }
         catch(err){
             console.log(err);
+            return;
         }
     }
     htmlUpdate();
@@ -52,11 +59,16 @@ function getURL(country, myKey){
 async function data(url){
     try{
         let request = await fetch(url);
+        if (!request.ok){
+            location.reload();
+            alert("Invalid City!");
+            
+        }
         const myData = await request.json();
         return myData;
     }
     catch(err){
-        console.log(err);
+        alert("Invalid City :')");
     }
     
 }
@@ -74,4 +86,7 @@ async function fetchData(url){
 };
 
 
-
+function isRaining(main){
+    const regex = /\b(?:drizzle|rain)\b/;
+    return regex.test(main);
+}
